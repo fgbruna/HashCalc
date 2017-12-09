@@ -1,3 +1,5 @@
+#!/usr/bin/python3.6
+
 import sys
 import os
 from PyQt5 import uic, QtGui
