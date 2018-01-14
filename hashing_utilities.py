@@ -24,15 +24,3 @@ def sha256(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_sha256.update(chunk)
     return hash_sha256.hexdigest()
-
-
-def main():
-    path = input("Give me the path to your file: ")
-    checksum = sha1(path.strip())
-    print("CHECKSUM: ", checksum)
-    _sum = input("Gimme the sum provided by the dev: ")
-    print("YES" if _sum == checksum else "NO :(")
-
-
-if __name__ == '__main__':
-    main()
