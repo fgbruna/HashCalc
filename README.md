@@ -17,6 +17,7 @@
 ### Make it executable
 
 ```cd HashCalc```
+
 ```chmod +x hash_calc.py```
 
 ### Run it  :heavy_check_mark:
