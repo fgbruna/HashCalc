@@ -22,7 +22,7 @@ class Main(*mainwindow):
         self.icono = QtGui.QIcon()
         self.icono.addFile(os.path.join("ui", "hashtag.svg"))
         self.setWindowIcon(self.icono)
-        self.selected_file = None
+        self.selectedFile = None
         self.back = HashCalc(self)
         self.comboHash.addItems(self.back.methods.keys())
         self.trigger_file.connect(self.back.checksum)
@@ -45,7 +45,9 @@ class Main(*mainwindow):
             mode = self.comboHash.currentText()
             _hash = self.hashEdit.text().strip()
             self.trigger_file.emit(CheckEvent(self.selectedFile, mode, _hash))
-        # else QmessageBox!
+        else:
+            msg = QMessageBox.information(
+            self, "Message", "No file was selected", QMessageBox.Ok, QMessageBox.Ok)
 
 
 def main():
