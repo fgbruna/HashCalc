@@ -43,7 +43,7 @@ class Main(*mainwindow):
     def verify(self):
         if self.selectedFile:
             mode = self.comboHash.currentText()
-            _hash = self.hashEdit.text().strip()
+            _hash = self.hashEdit.text().strip().upper()
             self.trigger_file.emit(CheckEvent(self.selectedFile, mode, _hash))
         else:
             msg = QMessageBox.information(
