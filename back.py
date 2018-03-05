@@ -35,8 +35,10 @@ class HashCalc(QObject):
         print("Calculando!")
         try:
             t_0 = datetime.now()
-            _bool = event.hash_input == method(event.fname)
+            result = method(event.fname).upper()
+            _bool = event.hash_input == result
             delta = datetime.now() - t_0
+            print(f'Program hash: {result}')
             print("Runtime: {}".format(HashCalc.days_hours_minutes(delta)))
             self.trigger_calculated.emit(_bool)
         except FileNotFoundError:
