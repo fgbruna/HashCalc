@@ -33,7 +33,6 @@ class Main(*mainwindow):
     def getfile(self):
         fname = QFileDialog.getOpenFileName(self, 'Open file')
         self.selectedFile = fname[0]
-        mode = self.comboHash.currentText()
 
     def display_result(self, boolean):
         message = "Sums match" if boolean else "Sums do not match"
