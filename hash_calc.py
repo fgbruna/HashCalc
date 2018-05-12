@@ -47,7 +47,7 @@ class Main(*mainwindow):
             self.trigger_file.emit(CheckEvent(self.selectedFile, mode, _hash))
         else:
             msg = QMessageBox.information(
-            self, "Message", "No file was selected", QMessageBox.Ok, QMessageBox.Ok)
+                self, "Message", "No file was selected", QMessageBox.Ok, QMessageBox.Ok)
 
 
 def main():

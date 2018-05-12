@@ -2,11 +2,13 @@ from datetime import datetime
 from PyQt5.QtCore import QObject, pyqtSignal
 from hashing_utilities import md5, sha1, sha256
 
+
 class CheckEvent:
     def __init__(self, filename, method, _hash):
         self.hash_input = _hash
         self.fname = filename
         self.methodname = method
+
 
 class HashCalc(QObject):
 
@@ -18,10 +20,9 @@ class HashCalc(QObject):
         self.methods = {"sha1": sha1, "md5": md5, "sha256": sha256}
 
     @staticmethod
-    def days_hours_minutes(td): # Transform timedelta object to minutes and seconds
-        values = ((td.seconds//60)%60, td.seconds)
+    def days_hours_minutes(td):  # Transform timedelta object to minutes and seconds
+        values = ((td.seconds//60) % 60, td.seconds)
         return f"{values[0]} minutes, {values[1]} seconds"
-
 
     def checksum(self, event):
         """
@@ -43,4 +44,3 @@ class HashCalc(QObject):
             self.trigger_calculated.emit(_bool)
         except FileNotFoundError:
             print("The file given by the path does not exist")
-
