@@ -1,4 +1,5 @@
 from datetime import datetime
+from time import process_time_ns
 from PyQt5.QtCore import QObject, pyqtSignal
 from hashing_utilities import md5, sha1, sha256
 
@@ -19,11 +20,6 @@ class HashCalc(QObject):
         self.trigger_calculated.connect(parent.display_result)
         self.methods = {"sha1": sha1, "md5": md5, "sha256": sha256}
 
-    @staticmethod
-    def days_hours_minutes(td):  # Transform timedelta object to minutes and seconds
-        values = ((td.seconds//60) % 60, td.seconds)
-        return f"{values[0]} minutes, {values[1]} seconds"
-
     def checksum(self, event):
         """
         Given a path(filename) and a hash algorhitm(_hash)
@@ -33,14 +29,13 @@ class HashCalc(QObject):
         print("Method to use: ", method)
         print("Path: ", event.fname)
         print("User hash: ", event.hash_input)
-        print("Calculando!")
+        print("Calculating hash!")
         try:
-            t_0 = datetime.now()
+            t_0 = process_time_ns()
             result = method(event.fname).upper()
             _bool = event.hash_input == result
-            delta = datetime.now() - t_0
             print(f'Program hash: {result}')
-            print("Runtime: {}".format(HashCalc.days_hours_minutes(delta)))
+            print("Runtime: {} seconds".format((process_time_ns()-t_0)/1e9))
             self.trigger_calculated.emit(_bool)
         except FileNotFoundError:
             print("The file given by the path does not exist")
